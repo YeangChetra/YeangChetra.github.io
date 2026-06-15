@@ -1,12 +1,14 @@
 import { QueryClient } from "@tanstack/react-query";
-import { createRouter } from "@tanstack/react-router";
+import { createRouter, createHashHistory } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 
 export const getRouter = () => {
   const queryClient = new QueryClient();
 
+  // Use hash history for GitHub Pages — no server-side URL rewriting available
   const router = createRouter({
     routeTree,
+    history: createHashHistory(),
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
